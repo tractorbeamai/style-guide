@@ -1,3 +1,4 @@
+export { default as auto } from "./auto.js";
 export * as base from "./_base.js";
 export * as browser from "./browser.js";
 export * as jsdoc from "./jsdoc.js";
