@@ -30,8 +30,13 @@
   ],
   "keywords": [],
   "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "preinstall": "npx only-allow pnpm",
     "release": "changeset publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "eslint": "^9.34.0",
