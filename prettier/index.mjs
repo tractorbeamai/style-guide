@@ -1,3 +1,9 @@
+/* eslint-disable jsdoc/check-tag-names */
+
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type {import("prettier").Config}
+ */
 const config = {
   /**
    * Some of Prettier's defaults can be overridden by an EditorConfig file. We
