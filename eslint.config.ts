@@ -1,8 +1,12 @@
-import tseslint from "typescript-eslint";
-import auto from "./eslint/auto.js";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config(auto, {
-  rules: {
-    "import-x/no-named-as-default-member": "off",
+import configCore from "./eslint/core.js";
+
+export default defineConfig([
+  configCore,
+  {
+    rules: {
+      "import-x/no-named-as-default-member": "off",
+    },
   },
-});
+]);
