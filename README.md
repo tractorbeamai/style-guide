@@ -74,7 +74,7 @@ All configs can be imported from `@tractorbeamai/style-guide/eslint`.
 For most projects, we recommend using the `auto` configuration which includes a sensible set of defaults:
 
 ```js
-import { auto } from '@tractorbeamai/style-guide/eslint';
+import { auto } from "@tractorbeamai/style-guide/eslint";
 
 export default auto;
 ```
@@ -84,14 +84,14 @@ export default auto;
 For more control, you can compose your own configuration. For example, to use the shared ESLint config(s) in a React project, create an `eslint.config.js` file:
 
 ```js
-import { browser, prettier, react, typescript } from '@tractorbeamai/style-guide/eslint';
+import {
+  browser,
+  prettier,
+  react,
+  typescript,
+} from "@tractorbeamai/style-guide/eslint";
 
-export default [
-  ...browser,
-  ...react,
-  ...typescript,
-  ...prettier,
-];
+export default [...browser, ...react, ...typescript, ...prettier];
 ```
 
 ### Configuring ESLint for TypeScript
@@ -103,7 +103,7 @@ Our TypeScript configuration follows the [typescript-eslint recommended practice
 For projects that don't need typed linting, our `auto` configuration includes the equivalent of `recommended` + `stylistic`:
 
 ```js
-import { auto } from '@tractorbeamai/style-guide/eslint';
+import { auto } from "@tractorbeamai/style-guide/eslint";
 
 export default auto;
 ```
@@ -113,10 +113,10 @@ export default auto;
 For projects that enable typed linting, you'll need to configure the parser options:
 
 ```js
-import { node, typescript, prettier } from '@tractorbeamai/style-guide/eslint';
-import { resolve } from 'node:path';
+import { node, typescript, prettier } from "@tractorbeamai/style-guide/eslint";
+import { resolve } from "node:path";
 
-const project = resolve(process.cwd(), 'tsconfig.json');
+const project = resolve(process.cwd(), "tsconfig.json");
 
 export default [
   ...node,
@@ -129,7 +129,7 @@ export default [
       },
     },
     settings: {
-      'import/resolver': {
+      "import/resolver": {
         typescript: {
           project,
         },
@@ -148,7 +148,7 @@ export default [
 It's common practice for React apps to have shared components like `Button`, which wrap native elements. You can pass this information along to `jsx-a11y` via the `components` setting:
 
 ```js
-import { browser, react, prettier } from '@tractorbeamai/style-guide/eslint';
+import { browser, react, prettier } from "@tractorbeamai/style-guide/eslint";
 
 export default [
   ...browser,
@@ -156,14 +156,14 @@ export default [
   ...prettier,
   {
     settings: {
-      'jsx-a11y': {
+      "jsx-a11y": {
         components: {
-          Article: 'article',
-          Button: 'button',
-          Image: 'img',
-          Input: 'input',
-          Link: 'a',
-          Video: 'video',
+          Article: "article",
+          Button: "button",
+          Image: "img",
+          Input: "input",
+          Link: "a",
+          Video: "video",
         },
       },
     },
@@ -176,13 +176,13 @@ export default [
 ESLint configs can be scoped to include/exclude specific paths. This ensures that rules don't "leak" into places where those rules don't apply:
 
 ```js
-import { node, vitest, prettier } from '@tractorbeamai/style-guide/eslint';
+import { node, vitest, prettier } from "@tractorbeamai/style-guide/eslint";
 
 export default [
   ...node,
   ...prettier,
   {
-    files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+    files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
     ...vitest,
   },
 ];
@@ -192,8 +192,8 @@ export default [
 
 This style guide provides TypeScript configs optimized for Node.js 22+. The following config is available:
 
-| Node.js Version | TypeScript Config                                 |
-| --------------- | ------------------------------------------------- |
+| Node.js Version | TypeScript Config                              |
+| --------------- | ---------------------------------------------- |
 | v22+            | `@tractorbeamai/style-guide/typescript/node22` |
 
 To use the shared TypeScript config, set the following in `tsconfig.json`:

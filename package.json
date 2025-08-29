@@ -2,17 +2,21 @@
   "name": "@tractorbeamai/style-guide",
   "version": "0.1.0",
   "description": "Tractorbeam's engineering style guide",
-  "keywords": [],
-  "homepage": "https://github.com/tractorbeamai/style-guide#readme",
-  "bugs": {
-    "url": "https://github.com/tractorbeamai/style-guide/issues"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/tractorbeamai/style-guide.git"
   },
-  "license": "MIT",
+  "homepage": "https://github.com/tractorbeamai/style-guide#readme",
+  "bugs": {
+    "url": "https://github.com/tractorbeamai/style-guide/issues"
+  },
   "author": "Tractorbeam AI, Inc.",
+  "license": "MIT",
+  "packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "index.js",
   "exports": {
     "./eslint": "./eslint/index.ts",
     "./eslint/*": "./eslint/*.ts",
@@ -20,22 +24,41 @@
     "./typescript": "./typescript/tsconfig.base.json",
     "./typescript/node22": "./typescript/tsconfig.node22.json"
   },
-  "main": "index.js",
   "files": [
     "eslint",
     "prettier",
     "typescript"
   ],
+  "keywords": [],
   "scripts": {
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "preinstall": "npx only-allow pnpm",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "preinstall": "npx only-allow pnpm",
     "release": "changeset publish",
     "typecheck": "tsc --noEmit"
   },
-  "prettier": "./prettier/index.mjs",
+  "peerDependencies": {
+    "eslint": "^9.34.0",
+    "jiti": "^2.5.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    },
+    "jiti": {
+      "optional": true
+    },
+    "prettier": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@eslint/js": "^9.34.0",
     "@eslint/json": "^0.13.2",
@@ -43,6 +66,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.1",
+    "eslint-plugin-import-zod": "^1.2.0",
     "eslint-plugin-jsdoc": "^54.1.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-n": "^17.21.3",
@@ -67,31 +91,8 @@
     "prettier": "^3.6.2",
     "typescript": "^5.9.2"
   },
-  "peerDependencies": {
-    "eslint": "^9.34.0",
-    "jiti": "^2.5.1",
-    "prettier": "^3.6.2",
-    "typescript": "^5.9.2"
-  },
-  "peerDependenciesMeta": {
-    "eslint": {
-      "optional": true
-    },
-    "jiti": {
-      "optional": true
-    },
-    "prettier": {
-      "optional": true
-    },
-    "typescript": {
-      "optional": true
-    }
-  },
-  "packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b",
-  "engines": {
-    "node": ">=22"
-  },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "prettier": "./prettier/index.mjs"
 }
