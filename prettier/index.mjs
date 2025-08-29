@@ -18,7 +18,21 @@ const config = {
   printWidth: 80,
   useTabs: false,
 
-  plugins: ["prettier-plugin-pkg", "prettier-plugin-sh", "prettier-plugin-sql"],
+  plugins: [
+    "prettier-plugin-pkg",
+    "prettier-plugin-sh",
+    "prettier-plugin-sql",
+    "@ianvs/prettier-plugin-sort-imports",
+  ],
+
+  importOrder: [
+    "",
+    "<BUILTIN_MODULES>",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^[.]",
+  ],
 };
 
 export default config;
