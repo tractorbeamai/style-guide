@@ -1,9 +1,9 @@
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 
 import pluginUnicorn from "eslint-plugin-unicorn";
-import tseslint from "typescript-eslint";
 
-export default tseslint.config({
+export default defineConfig({
   languageOptions: {
     globals: {
       ...globals.browser,
