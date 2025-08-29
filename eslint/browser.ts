@@ -1,5 +1,6 @@
-import pluginUnicorn from "eslint-plugin-unicorn";
 import globals from "globals";
+
+import pluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config({

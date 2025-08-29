@@ -1,7 +1,7 @@
+import js from "@eslint/js";
 import pluginImportX from "eslint-plugin-import-x";
 import pluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
-import js from "@eslint/js";
 
 export default tseslint.config({
   files: ["**/*.{js,jsx,ts,tsx,mjs}"],

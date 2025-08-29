@@ -1,4 +1,5 @@
 import tseslint from "typescript-eslint";
+
 import auto from "./eslint/auto.js";
 
 export default tseslint.config(auto, {

@@ -1,5 +1,5 @@
-import tseslint from "typescript-eslint";
 import json from "@eslint/json";
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
