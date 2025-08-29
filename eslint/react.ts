@@ -1,6 +1,7 @@
 import type { Linter } from "eslint";
 import { defineConfig } from "eslint/config";
 
+// @ts-expect-error - DefinitelyTyped types are not compatible with ESLint 9.34
 import pluginJSXA11y from "eslint-plugin-jsx-a11y";
 import pluginReact from "eslint-plugin-react";
 import * as pluginReactHooks from "eslint-plugin-react-hooks";
