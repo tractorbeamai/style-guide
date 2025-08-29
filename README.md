@@ -35,11 +35,28 @@ Some of our ESLint configs require peer dependencies. We'll note those alongside
 
 To use the shared Prettier config, set the following in `package.json`.
 
-```json
+````json
 {
   "prettier": "@tractorbeamai/style-guide/prettier"
 }
-```
+
+### Customizing Prettier
+
+You can customize the Prettier config by creating a `prettier.config.mjs` file in your project root.
+
+```js
+import tractorbeamPrettierConfig from "@tractorbeamai/style-guide/prettier";
+
+/**
+ * @type {import("prettier").Config}
+ */
+const config = {
+  ...tractorbeamPrettierConfig,
+  semi: false,
+};
+
+export default config;
+````
 
 ## ESLint
 
@@ -49,143 +66,42 @@ To use the shared Prettier config, set the following in `package.json`.
 
 This ESLint config is designed to be composable and uses the new [flat config format](https://eslint.org/docs/latest/use/configure/configuration-files).
 
-We provide an `auto` configuration that includes sensible defaults for most projects:
+We provide a `core` configuration that includes sensible defaults for all projects:
 
-- `auto` (recommended for most projects)
+- `core` (recommended for all projects)
 
-The following individual configs are also available:
+We also provide environment-specific configs for Browser, Node.js, and Vitest projects. Usually, you'll layer one of these on top of the `core` config.
 
-- `base`
 - `browser`
-- `jsdoc`
-- `json`
 - `node`
-- `prettier`
-- `react`
-- `regexp`
-- `typescript` (requires `typescript` to be installed)
 - `vitest`
+
+When using specific tools, you may also want to add one of the following configs:
+
+- `jsdoc` (included in `core`)
+- `json` (included in `core`)
+- `prettier` (included in `core`)
+- `react`
+- `regexp` (included in `core`)
+- `typescript` (requires `typescript` to be installed)
 - `zod`
 
+Lastly, when using this config with Prettier, you can add the `prettier` config to your ESLint config to disable any ESLint rules that would conflict with Prettier. This is included in the `core` config, but you may want to add it to the end of your config to ensure it's the last rule applied if you're doing additional customizations or layering other third-party configs on top of `core`.
+
 All configs can be imported from `@tractorbeamai/style-guide/eslint`.
-
-### Recommended: Auto Configuration
-
-For most projects, we recommend using the `auto` configuration which includes a sensible set of defaults:
-
-```js
-import { auto } from "@tractorbeamai/style-guide/eslint";
-
-export default auto;
-```
-
-### Manual Configuration
-
-For more control, you can compose your own configuration. For example, to use the shared ESLint config(s) in a React project, create an `eslint.config.js` file:
-
-```js
-import {
-  browser,
-  prettier,
-  react,
-  typescript,
-} from "@tractorbeamai/style-guide/eslint";
-
-export default [...browser, ...react, ...typescript, ...prettier];
-```
-
-### Configuring ESLint for TypeScript
-
-Our TypeScript configuration follows the [typescript-eslint recommended practices](https://typescript-eslint.io/users/configs). Some of the rules enabled in the TypeScript config require additional type information, so you'll need to provide the path to your `tsconfig.json` file.
-
-#### Projects Without Type Checking
-
-For projects that don't need typed linting, our `auto` configuration includes the equivalent of `recommended` + `stylistic`:
-
-```js
-import { auto } from "@tractorbeamai/style-guide/eslint";
-
-export default auto;
-```
-
-#### Projects With Type Checking
-
-For projects that enable typed linting, you'll need to configure the parser options:
-
-```js
-import { node, typescript, prettier } from "@tractorbeamai/style-guide/eslint";
-import { resolve } from "node:path";
-
-const project = resolve(process.cwd(), "tsconfig.json");
-
-export default [
-  ...node,
-  ...typescript,
-  ...prettier,
-  {
-    languageOptions: {
-      parserOptions: {
-        project,
-      },
-    },
-    settings: {
-      "import/resolver": {
-        typescript: {
-          project,
-        },
-      },
-    },
-  },
-];
-```
-
-> **Note**: Our TypeScript configuration includes rules that require type information (equivalent to `recommended-type-checked` + `stylistic-type-checked`). This provides more comprehensive linting but requires the `parserOptions.project` configuration above.
->
-> **Performance Tip**: Type-checked rules can be slower on large projects. If you experience performance issues, consider using only our base configurations without the TypeScript config, or configure TypeScript rules to run only on specific file patterns.
-
-### Configuring custom components for `jsx-a11y`
-
-It's common practice for React apps to have shared components like `Button`, which wrap native elements. You can pass this information along to `jsx-a11y` via the `components` setting:
-
-```js
-import { browser, react, prettier } from "@tractorbeamai/style-guide/eslint";
-
-export default [
-  ...browser,
-  ...react,
-  ...prettier,
-  {
-    settings: {
-      "jsx-a11y": {
-        components: {
-          Article: "article",
-          Button: "button",
-          Image: "img",
-          Input: "input",
-          Link: "a",
-          Video: "video",
-        },
-      },
-    },
-  },
-];
-```
 
 ### Scoped configuration with file patterns
 
 ESLint configs can be scoped to include/exclude specific paths. This ensures that rules don't "leak" into places where those rules don't apply:
 
 ```js
-import { node, vitest, prettier } from "@tractorbeamai/style-guide/eslint";
+import { node, prettier, vitest } from "@tractorbeamai/style-guide/eslint";
+import tseslint from "typescript-eslint";
 
-export default [
-  ...node,
-  ...prettier,
-  {
-    files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-    ...vitest,
-  },
-];
+export default tseslint.config(...node, ...prettier, {
+  files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+  ...vitest,
+});
 ```
 
 ## TypeScript

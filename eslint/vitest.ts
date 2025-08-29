@@ -1,4 +1,5 @@
-import pluginVitest from "@vitest/eslint-plugin";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config(pluginVitest.configs.all);
+import pluginVitest from "@vitest/eslint-plugin";
+
+export default defineConfig(pluginVitest.configs.all);

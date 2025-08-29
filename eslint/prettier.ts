@@ -1,4 +1,5 @@
-import configPrettier from "eslint-config-prettier/flat";
-import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-export default tseslint.config(configPrettier);
+import configPrettier from "eslint-config-prettier/flat";
+
+export default defineConfig(configPrettier);
